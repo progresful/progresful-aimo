@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/img/mark.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ec" />
+    <title>AI-MO — trusted trade agents for Valio Aimo</title>
+    <script>
+      // Apply the saved theme before first paint (next-themes takes over once React mounts).
+      (function () {
+        var theme = 'light';
+        try {
+          theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+        } catch (e) {}
+        var root = document.documentElement;
+        root.classList.add(theme);
+        root.style.colorScheme = theme;
+      })();
+    </script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #f7f4ec;
+        color: #16171c;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      html.dark,
+      html.dark body {
+        background: #0d111e;
+        color: #f2ecdd;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      #root {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

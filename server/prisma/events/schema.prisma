@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator eventstore_client {
+  provider = "prisma-client-js"
+  output   = "../generated/eventstore_prisma"
+}
+
+datasource eventstore_db {
+  provider = "postgresql"
+  url      = env("EVENTSTORE_URL")
+}
+
+model Event {
+  id             String    @id
+  name           String
+  data           String
+  meta           String
+  aggregate_id   String
+  aggregate_type String
+  created_at     DateTime  @default(now())
+  is_anonymized  Boolean   @default(false)
+  anonymized_at  DateTime?
+
+  @@index([aggregate_id])
+  @@index([aggregate_type])
+  @@index([aggregate_id, aggregate_type, created_at])
+  @@index([name])
+  @@index([is_anonymized])
+  @@map("events")
+}
+
+model ProcessedEvent {
+  event_id        String   @id
+  aggregate_id    String
+  aggregate_type  String
+  processed_at    DateTime @default(now())
+  processing_node String
+
+  @@index([aggregate_id])
+  @@index([aggregate_type])
+  @@index([processed_at])
+  @@map("processed_events")
+}
+
+model ForgottenAggregate {
+  aggregate_id   String   @id
+  aggregate_type String
+  forgotten_at   DateTime @default(now())
+  requested_by   String
+  reason         String
+  event_count    Int
+
+  @@index([aggregate_type])
+  @@map("forgotten_aggregates")
+}
+
+model AnonymizationKey {
+  aggregate_id   String   @id
+  encryption_key String
+  created_at     DateTime @default(now())
+
+  @@map("anonymization_keys")
+}

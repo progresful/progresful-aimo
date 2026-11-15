@@ -1,0 +1,32 @@
+#!/bin/sh
+# Links shared, gitignored data (node_modules, .db, .env) into a freshly created worktree.
+# The list lives in .claude/settings.json (worktree.symlinkDirectories), so worktrees
+# created by `claude -w` and by plain `git worktree add` (e.g. Pruse) get the same setup.
+
+# Only on a new worktree: git passes the null sha as the previous HEAD.
+[ "$1" = "0000000000000000000000000000000000000000" ] || exit 0
+
+main=$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")
+here=$(git rev-parse --show-toplevel)
+[ "$main" = "$here" ] && exit 0
+
+paths=$(node -e '
+  const s = require(process.argv[1] + "/.claude/settings.json");
+  console.log(((s.worktree && s.worktree.symlinkDirectories) || []).join("\n"));
+' "$main") || exit 0
+
+for p in $paths; do
+  if [ -e "$main/$p" ] && [ ! -e "$here/$p" ] && [ ! -L "$here/$p" ]; then
+    mkdir -p "$(dirname "$here/$p")"
+    ln -s "$main/$p" "$here/$p" && echo "worktree: linked $p"
+  fi
+done
+
+# The Prisma client is generated per schema, so it isn't shared; build it for this branch.
+if [ -d "$here/server/node_modules" ]; then
+  (cd "$here/server" && npm run --silent generate:all >/dev/null 2>&1) &&
+    echo "worktree: generated prisma clients" ||
+    echo "worktree: prisma generate failed, run 'npm run generate:all' in server/"
+fi
+
+exit 0

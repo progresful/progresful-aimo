@@ -1,0 +1,424 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserAccountRole {
+  user
+  admin
+}
+
+model User {
+  id            String    @id
+  name          String    @default("")
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now()) @updatedAt
+  role          String    @default("user")
+  banned        Boolean?  @default(false)
+  banReason     String?
+  banExpires    DateTime?
+
+  // Relations
+  sessions          Session[]
+  accounts          Account[]
+  apikeys           Apikey[]
+  members           Member[]
+  invitations       Invitation[]
+  teammembers       TeamMember[]
+  messages          Message[]
+  messageRecipients MessageRecipient[]
+
+  featureflags FeatureFlag[]
+
+  @@index([email])
+  @@map("user")
+}
+
+model Session {
+  id                   String   @id
+  expiresAt            DateTime
+  token                String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @default(now()) @updatedAt
+  ipAddress            String?
+  userAgent            String?
+  userId               String
+  impersonatedBy       String?
+  activeOrganizationId String?
+  activeTeamId         String?
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now()) @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@map("verification")
+}
+
+model Apikey {
+  id                  String    @id
+  name                String?
+  start               String?
+  prefix              String?
+  key                 String
+  userId              String
+  refillInterval      Int?
+  refillAmount        Int?
+  lastRefillAt        DateTime?
+  enabled             Boolean?  @default(true)
+  rateLimitEnabled    Boolean?  @default(true)
+  rateLimitTimeWindow Int?
+  rateLimitMax        Int?
+  requestCount        Int?
+  remaining           Int?
+  lastRequest         DateTime?
+  expiresAt           DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @default(now()) @updatedAt
+  permissions         String?
+  metadata            String?
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("apikey")
+}
+
+enum OrganizationTier {
+  free
+  paid
+}
+
+model Organization {
+  id        String            @id
+  name      String
+  slug      String
+  logo      String?
+  createdAt DateTime          @default(now())
+  metadata  String?
+  tier      OrganizationTier? @default(free)
+
+  // Relations
+  members     Member[]
+  invitations Invitation[]
+  teams       Team[]
+  messages    Message[]
+
+  featureflags FeatureFlag[]
+
+  @@unique([slug])
+  @@map("organization")
+}
+
+model Member {
+  id             String   @id
+  organizationId String
+  userId         String
+  role           String
+  createdAt      DateTime @default(now())
+
+  // Relations
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("member")
+}
+
+model Invitation {
+  id             String   @id
+  organizationId String
+  email          String
+  role           String?
+  status         String
+  expiresAt      DateTime
+  inviterId      String
+  teamId         String?
+
+  // Relations
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
+
+  @@map("invitation")
+}
+
+model Team {
+  id             String   @id
+  name           String
+  organizationId String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+
+  // Relations
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  teammembers  TeamMember[]
+  messages     Message[]
+
+  @@map("team")
+}
+
+model TeamMember {
+  id        String   @id
+  teamId    String
+  userId    String
+  createdAt DateTime @default(now())
+
+  // Relations
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("teamMember")
+}
+
+model Message {
+  id             String    @id
+  content        String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now()) @updatedAt
+  deletedAt      DateTime?
+  fromUserId     String
+  fromType       String    @default("user")
+  organizationId String?
+  teamId         String?
+
+  // Relations
+  fromUser     User               @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
+  organization Organization?      @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  team         Team?              @relation(fields: [teamId], references: [id], onDelete: SetNull)
+  recipients   MessageRecipient[]
+
+  @@map("message")
+}
+
+model MessageRecipient {
+  id        String    @id
+  messageId String
+  toUserId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  readAt    DateTime?
+  deletedAt DateTime?
+
+  // Relations
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [toUserId], references: [id], onDelete: Cascade)
+
+  @@map("messageRecipient")
+}
+
+model Feature {
+  id           String        @id
+  name         String
+  displayName  String
+  description  String?
+  active       Boolean
+  featureflags FeatureFlag[]
+
+  @@unique([name])
+  @@map("feature")
+}
+
+model FeatureFlag {
+  id             String        @id
+  userId         String?
+  user           User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  featureId      String
+  feature        Feature       @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  enabled        Boolean
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("featureFlag")
+}
+
+// --- Mandate gateway --------------------------------------------------------
+// Status columns are plain strings; allowed values are documented per field and
+// enforced by the gateway services (and the OpenAPI spec).
+
+model Policy {
+  id             String    @id
+  organizationId String
+  key            String // stable across versions, e.g. pol_hospital-ward-dairy
+  name           String
+  version        Int
+  status         String // draft | signed | superseded
+  plainLanguage  String
+  document       Json // compiled mandate.policy/v1 document
+  summary        String? // what changed in this version
+  signedBy       String?
+  signedRole     String?
+  signedAt       DateTime?
+  signature      String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now()) @updatedAt
+
+  @@unique([organizationId, key, version])
+  @@index([organizationId, key])
+  @@map("gw_policy")
+}
+
+model Quote {
+  id             String   @id // qt_…
+  organizationId String
+  policyId       String? // Policy row id (a specific version)
+  agentId        String?
+  requestedDate  String // YYYY-MM-DD
+  lines          Json
+  total          Float
+  issuedAt       DateTime
+  expiresAt      DateTime
+  payload        Json // exactly what was signed
+  signature      String
+
+  @@index([organizationId])
+  @@map("gw_quote")
+}
+
+model Order {
+  id             String   @id // VA-20458
+  organizationId String
+  policyId       String // Policy row id
+  policyKey      String
+  policyVersion  Int
+  agentId        String?
+  quoteId        String?
+  status         String // executed | pending_approval | partial | declined | blocked | expired
+  title          String
+  request        Json
+  lines          Json
+  total          Float // proposed total
+  committedTotal Float    @default(0) // what was actually ordered
+  deliveryDate   String
+  checks         Json
+  candidates     Json?
+  idempotencyKey String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+
+  approval Approval?
+
+  @@unique([organizationId, idempotencyKey])
+  @@index([organizationId, createdAt])
+  @@map("gw_order")
+}
+
+model Approval {
+  id             String    @id // apr_…
+  orderId        String    @unique
+  organizationId String
+  approverName   String
+  approverRole   String
+  status         String // pending | approved | declined | partial | timed_out
+  reasons        Json
+  fallback       Json // lines the policy allows on its own (used on partial / timeout)
+  expiresAt      DateTime
+  decidedAt      DateTime?
+  decidedBy      String?
+  decidedRole    String?
+  comment        String?
+  signature      String?
+  createdAt      DateTime  @default(now())
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, status])
+  @@map("gw_approval")
+}
+
+model AuditEntry {
+  seq            Int      @unique @default(autoincrement())
+  id             String   @id
+  organizationId String
+  orderId        String?
+  step           String // request | lookup | stock | substitutes | lactose | policy | approval | order | audit | …
+  status         String // auto | pending | blocked | skipped
+  actor          String // buyer-agent | gateway | valio-api | policy | head-chef
+  message        String
+  payload        Json
+  prevHash       String
+  hash           String   @unique
+  createdAt      DateTime
+
+  @@index([organizationId, seq])
+  @@index([orderId])
+  @@map("gw_audit_entry")
+}
+
+model Agent {
+  id             String   @id // agt_…
+  organizationId String
+  name           String
+  vendor         String
+  model          String
+  host           String
+  transport      String // mcp | openapi
+  policyId       String // Policy key — the agent always runs on the latest signed version
+  apiKeyId       String?
+  createdAt      DateTime @default(now())
+
+  @@index([organizationId])
+  @@map("gw_agent")
+}
+
+model Automation {
+  id               String    @id // aut_…
+  organizationId   String
+  name             String
+  description      String?
+  enabled          Boolean   @default(true)
+  days             Int[] // ISO weekdays, 1 = Monday … 7 = Sunday
+  time             String // HH:MM, Europe/Helsinki
+  leadDays         Int       @default(1) // delivery date = run day + leadDays
+  lines            Json // [{ code, quantity, unit }]
+  allowSubstitutes Boolean   @default(true)
+  agentId          String // runs as this agent, under its bound policy
+  nextRunAt        DateTime? // next scheduled slot; null when disabled
+  createdBy        String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @default(now()) @updatedAt
+
+  @@index([organizationId])
+  @@index([enabled, nextRunAt])
+  @@map("gw_automation")
+}

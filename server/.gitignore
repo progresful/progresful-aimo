@@ -1,0 +1,7 @@
+local.ts
+node_modules/
+.env
+prisma/generated/
+
+# Agent API keys printed by the gateway seed (plaintext — never commit)
+.agent-keys.local.json

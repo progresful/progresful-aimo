@@ -1,0 +1,8 @@
+{
+  "name": "base",
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "git config core.hooksPath \"$PWD/.githooks\" && cd client && npm i && cd ../server && npm i && npm run generate:all",
+    "init": "npm run setup && cd server && npm run reset:events && npm run reset:seed:app"
+  }
+}

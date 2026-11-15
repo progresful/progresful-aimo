@@ -1,0 +1,677 @@
+{
+  "_comment": "Copied from client/src/demo/catalog.ts. Codes 464398, 463335, 463038, 463359 are real Valio products (names, LACS); prices simulated. Rows with sample:true are invented (codes start with 9).",
+  "products": [
+    {
+      "code": "464398",
+      "name": "Valio Eila semi skimmed milk drink 1 l UHT lactose free",
+      "category": "Milk",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "ambient",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 12,
+      "perPallet": 768,
+      "price": 1.39,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 155,
+        "fat": 1.5,
+        "carbs": 3.1,
+        "sugars": 3.1,
+        "protein": 4,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [
+        "463335"
+      ],
+      "reliability": 0.94,
+      "group": "milk.drink",
+      "co2eKgPerKg": 1.2
+    },
+    {
+      "code": "463335",
+      "name": "Valio Eila 3 % milk drink 1 l lactose free",
+      "category": "Milk",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 12,
+      "perPallet": 768,
+      "price": 1.62,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 210,
+        "fat": 3,
+        "carbs": 3.1,
+        "sugars": 3.1,
+        "protein": 4,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [],
+      "reliability": 0.97,
+      "group": "milk.drink",
+      "co2eKgPerKg": 1.2
+    },
+    {
+      "code": "463038",
+      "name": "Valio Eila semi skimmed milk drink 10 l box lactose free",
+      "category": "Milk",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "box",
+        "size": 10,
+        "base": "l"
+      },
+      "perCase": 1,
+      "perPallet": 60,
+      "price": 12.1,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 155,
+        "fat": 1.5,
+        "carbs": 3.1,
+        "sugars": 3.1,
+        "protein": 4,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [],
+      "reliability": 0.88,
+      "group": "milk.drink",
+      "co2eKgPerKg": 1.2
+    },
+    {
+      "code": "463359",
+      "name": "Valio semi skimmed milk 1 l",
+      "category": "Milk",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 12,
+      "perPallet": 768,
+      "price": 1.09,
+      "lacs": 4.8,
+      "nutrition": {
+        "energyKj": 194,
+        "fat": 1.5,
+        "carbs": 4.8,
+        "sugars": 4.8,
+        "protein": 3.4,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [],
+      "reliability": 0.99,
+      "group": "milk.drink",
+      "co2eKgPerKg": 1.2
+    },
+    {
+      "code": "900112",
+      "name": "Valio Eila lactose free cooking cream 15 % 1 l",
+      "category": "Cream",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 6,
+      "perPallet": 504,
+      "price": 4.85,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 680,
+        "fat": 15,
+        "carbs": 3.5,
+        "sugars": 3.5,
+        "protein": 3,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [
+        "901142"
+      ],
+      "reliability": 0.92,
+      "sample": true,
+      "group": "cream",
+      "co2eKgPerKg": 3.9
+    },
+    {
+      "code": "900215",
+      "name": "Valio natural yoghurt 1 kg",
+      "category": "Yoghurt & quark",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "tub",
+        "size": 1,
+        "base": "kg"
+      },
+      "perCase": 6,
+      "perPallet": 432,
+      "price": 2.95,
+      "lacs": 3.6,
+      "nutrition": {
+        "energyKj": 260,
+        "fat": 2.5,
+        "carbs": 4.9,
+        "sugars": 4.9,
+        "protein": 4.4,
+        "salt": 0.1
+      },
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.95,
+      "sample": true,
+      "group": "yoghurt.quark",
+      "co2eKgPerKg": 1.7
+    },
+    {
+      "code": "900318",
+      "name": "Valio Eila lactose free natural yoghurt 1 kg",
+      "category": "Yoghurt & quark",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "tub",
+        "size": 1,
+        "base": "kg"
+      },
+      "perCase": 6,
+      "perPallet": 432,
+      "price": 3.45,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 250,
+        "fat": 2.5,
+        "carbs": 4.2,
+        "sugars": 4.2,
+        "protein": 4.5,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [
+        "900215"
+      ],
+      "reliability": 0.9,
+      "sample": true,
+      "group": "yoghurt.quark",
+      "co2eKgPerKg": 1.7
+    },
+    {
+      "code": "900421",
+      "name": "Valio butter normal salted 500 g",
+      "category": "Butter & spreads",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "pack",
+        "size": 0.5,
+        "base": "kg"
+      },
+      "perCase": 20,
+      "perPallet": 1200,
+      "price": 4.6,
+      "lacs": 0.6,
+      "nutrition": {
+        "energyKj": 3000,
+        "fat": 80,
+        "carbs": 0.6,
+        "sugars": 0.6,
+        "protein": 0.6,
+        "salt": 1.2
+      },
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.98,
+      "sample": true,
+      "group": "butter.spreads",
+      "co2eKgPerKg": 9.1
+    },
+    {
+      "code": "900524",
+      "name": "Valio Oivariini spread 400 g",
+      "category": "Butter & spreads",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "tub",
+        "size": 0.4,
+        "base": "kg"
+      },
+      "perCase": 12,
+      "perPallet": 960,
+      "price": 3.75,
+      "lacs": null,
+      "nutrition": null,
+      "allergens": null,
+      "substitutes": [
+        "900421"
+      ],
+      "reliability": 0.96,
+      "sample": true,
+      "group": "butter.spreads",
+      "co2eKgPerKg": 9.1
+    },
+    {
+      "code": "900627",
+      "name": "Valio Edam cheese slices 1 kg",
+      "category": "Cheese",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "pack",
+        "size": 1,
+        "base": "kg"
+      },
+      "perCase": 5,
+      "perPallet": 300,
+      "price": 11.9,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 1420,
+        "fat": 24,
+        "carbs": 0,
+        "sugars": 0,
+        "protein": 27,
+        "salt": 1.3
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [
+        "900730"
+      ],
+      "reliability": 0.93,
+      "sample": true,
+      "group": "cheese",
+      "co2eKgPerKg": 8.6
+    },
+    {
+      "code": "900730",
+      "name": "Valio Polar 15 % cheese 1 kg block",
+      "category": "Cheese",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "block",
+        "size": 1,
+        "base": "kg"
+      },
+      "perCase": 6,
+      "perPallet": 360,
+      "price": 10.4,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 1090,
+        "fat": 15,
+        "carbs": 0,
+        "sugars": 0,
+        "protein": 31,
+        "salt": 1.4
+      },
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.86,
+      "sample": true,
+      "group": "cheese",
+      "co2eKgPerKg": 8.6
+    },
+    {
+      "code": "900833",
+      "name": "Valio Oltermanni cheese 1.2 kg",
+      "category": "Cheese",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "piece",
+        "size": 1.2,
+        "base": "kg"
+      },
+      "perCase": 4,
+      "perPallet": 240,
+      "price": 13.8,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 1460,
+        "fat": 27,
+        "carbs": 0,
+        "sugars": 0,
+        "protein": 25,
+        "salt": 1.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [
+        "900627"
+      ],
+      "reliability": 0.95,
+      "sample": true,
+      "group": "cheese",
+      "co2eKgPerKg": 8.6
+    },
+    {
+      "code": "900936",
+      "name": "Valio plain quark 1 kg",
+      "category": "Yoghurt & quark",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "tub",
+        "size": 1,
+        "base": "kg"
+      },
+      "perCase": 6,
+      "perPallet": 432,
+      "price": 3.2,
+      "lacs": 3.5,
+      "nutrition": {
+        "energyKj": 270,
+        "fat": 0.2,
+        "carbs": 3.5,
+        "sugars": 3.5,
+        "protein": 12,
+        "salt": 0.1
+      },
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.91,
+      "sample": true,
+      "group": "yoghurt.quark",
+      "co2eKgPerKg": 1.7
+    },
+    {
+      "code": "901039",
+      "name": "Valio skimmed milk 10 l box",
+      "category": "Milk",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "box",
+        "size": 10,
+        "base": "l"
+      },
+      "perCase": 1,
+      "perPallet": 60,
+      "price": 9.4,
+      "lacs": 4.9,
+      "nutrition": {
+        "energyKj": 145,
+        "fat": 0.1,
+        "carbs": 4.9,
+        "sugars": 4.9,
+        "protein": 3.4,
+        "salt": 0.1
+      },
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.89,
+      "sample": true,
+      "group": "milk.skimmed",
+      "co2eKgPerKg": 1.2
+    },
+    {
+      "code": "901142",
+      "name": "Valio Eila lactose free whipping cream 35 % 1 l",
+      "category": "Cream",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 6,
+      "perPallet": 504,
+      "price": 7.9,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 1370,
+        "fat": 35,
+        "carbs": 2.9,
+        "sugars": 2.9,
+        "protein": 2.1,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        }
+      ],
+      "substitutes": [
+        "900112"
+      ],
+      "reliability": 0.93,
+      "sample": true,
+      "group": "cream",
+      "co2eKgPerKg": 3.9
+    },
+    {
+      "code": "901245",
+      "name": "Valio vanilla sauce 1 l UHT",
+      "category": "Desserts",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "ambient",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 12,
+      "perPallet": 768,
+      "price": 3.1,
+      "lacs": null,
+      "nutrition": null,
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.84,
+      "sample": true,
+      "group": "desserts",
+      "co2eKgPerKg": 3.2
+    },
+    {
+      "code": "901348",
+      "name": "Valio vanilla ice cream 2.5 l",
+      "category": "Desserts",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "frozen",
+      "salesUnit": {
+        "name": "tub",
+        "size": 2.5,
+        "base": "l"
+      },
+      "perCase": 4,
+      "perPallet": 192,
+      "price": 9.95,
+      "lacs": 5.2,
+      "nutrition": {
+        "energyKj": 860,
+        "fat": 10,
+        "carbs": 24,
+        "sugars": 21,
+        "protein": 3.5,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "AM",
+          "label": "Milk"
+        },
+        {
+          "code": "AY",
+          "label": "Soy"
+        }
+      ],
+      "substitutes": [],
+      "reliability": 0.81,
+      "sample": true,
+      "group": "desserts",
+      "co2eKgPerKg": 3.2
+    },
+    {
+      "code": "901451",
+      "name": "Oddlygood barista oat drink 1 l",
+      "category": "Plant-based",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "ambient",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 8,
+      "perPallet": 640,
+      "price": 2.35,
+      "lacs": 0,
+      "nutrition": {
+        "energyKj": 250,
+        "fat": 3,
+        "carbs": 6.5,
+        "sugars": 3.6,
+        "protein": 0.8,
+        "salt": 0.1
+      },
+      "allergens": [
+        {
+          "code": "GO",
+          "label": "Oats"
+        },
+        {
+          "code": "AW",
+          "label": "Gluten"
+        }
+      ],
+      "substitutes": [],
+      "reliability": 0.97,
+      "sample": true,
+      "group": "plant.based",
+      "co2eKgPerKg": 0.4
+    },
+    {
+      "code": "901554",
+      "name": "Valio sour cream 10 % 1 kg",
+      "category": "Cream",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "tub",
+        "size": 1,
+        "base": "kg"
+      },
+      "perCase": 6,
+      "perPallet": 432,
+      "price": 4.25,
+      "lacs": 3.2,
+      "nutrition": {
+        "energyKj": 520,
+        "fat": 10,
+        "carbs": 3.6,
+        "sugars": 3.6,
+        "protein": 3.1,
+        "salt": 0.1
+      },
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.9,
+      "sample": true,
+      "group": "cream",
+      "co2eKgPerKg": 3.9
+    },
+    {
+      "code": "901657",
+      "name": "Valio buttermilk 1 l",
+      "category": "Milk",
+      "vendor": "Valio Oy",
+      "origin": "FI",
+      "temperature": "chilled",
+      "salesUnit": {
+        "name": "carton",
+        "size": 1,
+        "base": "l"
+      },
+      "perCase": 12,
+      "perPallet": 768,
+      "price": 1.15,
+      "lacs": null,
+      "nutrition": null,
+      "allergens": null,
+      "substitutes": [],
+      "reliability": 0.92,
+      "sample": true,
+      "group": "milk.sour",
+      "co2eKgPerKg": 1.2
+    }
+  ]
+}

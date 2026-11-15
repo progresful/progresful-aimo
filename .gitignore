@@ -1,0 +1,30 @@
+local.ts
+node_modules/
+.DS_Store
+
+# Local env — never commit. Copy server/example.env → server/.env.
+.env
+.env.local
+server/.env
+server/.env.local
+
+# Build output
+dist/
+build/
+
+# Logs
+logs/*
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+
+# Leftover backup files from sed / editors
+*.bak
+
+# Claude Code worktrees
+.claude/worktrees/
+
+# Valio Aimo challenge dataset — licensed for Junction 2026 only, never commit
+/data/

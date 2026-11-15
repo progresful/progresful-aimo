@@ -1,0 +1,58 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file=.env --experimental-strip-types index.ts",
+    "generate:app": "prisma generate --schema=prisma/schema.prisma",
+    "generate:events": "prisma generate --schema=prisma/events/schema.prisma",
+    "generate:all": "npm run generate:app && npm run generate:events",
+    "generate:auth": "npx @better-auth/cli generate --config src/services/auth/auth.ts",
+    "seed:app": "node --env-file=.env --experimental-strip-types seed/withCommands.ts",
+    "seed:app-from-events": "node --env-file=.env --experimental-strip-types seed/fromEventsDB.ts",
+    "reset:app": "prisma migrate reset --force && prisma migrate deploy",
+    "reset:events": "prisma migrate reset --schema=prisma/events/schema.prisma --force && prisma migrate deploy --schema=prisma/events/schema.prisma",
+    "reset:all": "npm run reset:app && npm run reset:events",
+    "reset:seed:app": "npm run reset:app && npm run seed:app",
+    "reset:seed:app-from-events": "npm run reset:app && npm run seed:app-from-events",
+    "test": "node --experimental-strip-types --test src/domains/gateway/__tests__/*.test.ts"
+  },
+  "authors": [
+    "Jur\u0123is Kac\u0113ns <jurgis.kacens@gmail.com>",
+    "Em\u012bls P\u013cavenieks <emils@plavenieks.lv>",
+    "Kri\u0161j\u0101nis Me\u017eulis <krisjanis.mezulis@gmail.com>"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "description": "Base repository. Node with Prisma, Express, WebSockets, EventStore, and more.",
+  "devDependencies": {
+    "@types/compression": "^1.8.1",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.18.8",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@emplv/better-auth-feature-flags": "^0.1.3",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@prisma/client": "^6.6.0",
+    "argon2": "^0.44.0",
+    "better-auth": "1.3.34",
+    "body-parser": "^2.2.0",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "prisma": "^6.6.0",
+    "smtp2go-nodejs": "^0.3.5",
+    "ulid": "^3.0.1",
+    "ws": "^8.18.3",
+    "zod": "^4.1.11"
+  },
+  "engines": {
+    "node": "22.20.0"
+  },
+  "engineStrict": true
+}
